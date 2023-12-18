@@ -31,3 +31,22 @@ class RadioButtonPageLocators:
     NO_RADIO_BUTTON = ('xpath', '//label[@for="noRadio"]')
     IMPRESSIVE_RADIO_BUTTON = ('xpath', '//label[@for="impressiveRadio"]')
     OUTPUT_RESULT = ('xpath', '//span[@class="text-success"]')
+
+
+class WebTablePageLocators:
+    # add person form
+    ADD_BUTTON = ('xpath', '//button[@id="addNewRecordButton"]')
+    FIRSTNAME_INPUT = ('xpath', '//input[@id="firstName"]')
+    LASTNAME_INPUT = ('xpath', '//input[@id="lastName"]')
+    EMAIL_INPUT = ('xpath', '//input[@id="userEmail"]')
+    AGE_INPUT = ('xpath', '//input[@id="age"]')
+    SALARY_INPUT = ('xpath', '//input[@id="salary"]')
+    DEPARTMENT_INPUT = ('xpath', '//input[@id="department"]')
+    SUBMIT_BUTTON = ('xpath', '//button[@id="submit"]')
+
+    # table
+    FULL_PEOPLE_LIST = ('xpath', '//div[@class="rt-tr-group"]')
+
+    SEARCH_INPUT = ('xpath', '//input[@id="searchBox"]')
+    DELETE_BUTTON = ('xpath', '//span[@title="Delete"]')
+    ROW_PARENT = ('xpath', ".//ancestor::div[@class='rt-tr-group']")
