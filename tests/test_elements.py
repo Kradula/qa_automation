@@ -3,7 +3,7 @@ import time
 
 import locators.elements_page_locators
 from generator.generator import generated_person
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonPage, LinksPage
 from locators.elements_page_locators import WebTablePageLocators
 
 
@@ -94,3 +94,32 @@ class TestWebTable:
         web_table_page.open()
         count = web_table_page.select_up_to_some_rows()
         assert count == [5, 10, 20, 25, 50, 100], f'{print(count)} must be equal to [5, 10, 20, 25, 50, 100]'
+
+
+class TestButtonPage:
+
+    def test_different_click_on_buttons(self, driver):
+        button_page = ButtonPage(driver, 'https://demoqa.com/buttons')
+        button_page.open()
+        double = button_page.click_on_different_buttons('double')
+        right = button_page.click_on_different_buttons('right')
+        click = button_page.click_on_different_buttons('click')
+        assert double == "You have done a double click", "The double click button was not pressed"
+        assert right == "You have done a right click", "The right click button was not pressed"
+        assert click == "You have done a dynamic click", "The dynamic click button was not pressed"
+
+
+class TestLinksPage:
+
+    def test_check_link(self, driver):
+        links_page = LinksPage(driver, 'https://demoqa.com/links')
+        links_page.open()
+        href_link, current_url = links_page.check_new_tab_simple_link()
+        assert href_link == current_url, "Links didn't match"
+
+    def test_broken_link(self, driver):
+        links_page = LinksPage(driver, 'https://demoqa.com/links')
+        links_page.open()
+        response_code = links_page.check_broken_link("https://demoqa.com/bad-request")
+        assert response_code == 400, "The response code didn't equal 400"
+
