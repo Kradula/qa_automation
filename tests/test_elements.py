@@ -1,7 +1,10 @@
 import random
 import time
 
+import locators.elements_page_locators
+from generator.generator import generated_person
 from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage
+from locators.elements_page_locators import WebTablePageLocators
 
 
 class TestTextBox:
@@ -64,5 +67,30 @@ class TestWebTable:
         key_word = webtable_search.add_new_person()[random.randint(0, 5)]
         webtable_search.search_person(key_word)
         table_result = webtable_search.check_search_person()
+        print(key_word)
+        print(table_result)
         assert key_word in table_result, "The person wasn't found in the table"
 
+    def test_web_table_update_person_info(self, driver):
+        web_table_page = WebTablePage(driver, 'https://demoqa.com/webtables')
+        web_table_page.open()
+        lastname = web_table_page.add_new_person()[1]
+        web_table_page.search_person(lastname)
+        age = web_table_page.update_person_info()
+        row = web_table_page.check_search_person()
+        assert age in row, 'The person card has not been changed'
+
+    def test_web_table_delete_person(self, driver):
+        web_table_page = WebTablePage(driver, 'https://demoqa.com/webtables')
+        web_table_page.open()
+        email = web_table_page.add_new_person()[3]
+        web_table_page.search_person(email)
+        web_table_page.delete_person()
+        text = web_table_page.check_deleted()
+        assert text == 'No rows found', "The table isn't empty"
+
+    def test_webtable_change_amount_of_rows(self, driver):
+        web_table_page = WebTablePage(driver, 'https://demoqa.com/webtables')
+        web_table_page.open()
+        count = web_table_page.select_up_to_some_rows()
+        assert count == [5, 10, 20, 25, 50, 100], f'{print(count)} must be equal to [5, 10, 20, 25, 50, 100]'

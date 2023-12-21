@@ -50,3 +50,8 @@ class WebTablePageLocators:
     SEARCH_INPUT = ('xpath', '//input[@id="searchBox"]')
     DELETE_BUTTON = ('xpath', '//span[@title="Delete"]')
     ROW_PARENT = ('xpath', ".//ancestor::div[@class='rt-tr-group']")
+    NO_ROWS_FOUND = ('xpath', "//div[@class='rt-noData']")
+    COUNT_ROW_LIST = ('xpath', "//select[@aria-label='rows per page']")
+
+    # update
+    UPDATE_BUTTON = ('xpath', '//span[@title="Edit"]')
