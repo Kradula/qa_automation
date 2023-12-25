@@ -1,10 +1,11 @@
+import base64
+import os
 import random
-
 import requests
 from selenium.webdriver.support.select import Select
-from generator.generator import generated_person
+from generator.generator import generated_person, generated_file
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
-    WebTablePageLocators, ButtonPageLocators, LinksPageLocators
+    WebTablePageLocators, ButtonPageLocators, LinksPageLocators, UploadAndDownloadPageLocators
 from pages.base_page import BasePage
 
 
@@ -197,4 +198,26 @@ class LinksPage(BasePage):
         else:
             return request.status_code
 
+
+class UploadAndDownloadPage(BasePage):
+
+    locators = UploadAndDownloadPageLocators()
+
+    def upload_file(self):
+        file_name, path = generated_file()
+        self.element_is_present(self.locators.UPLOAD_BUTTON).send_keys(path)
+        text = self.element_is_present(self.locators.UPLOADED_FILE).text
+        os.remove(path)
+        return file_name.split('\\')[-1], text.split('\\')[-1]
+
+    def download_file(self):
+        link = self.element_is_present(self.locators.DOWNLOAD_FILE).get_attribute('href')
+        link_b = base64.b64decode(link)
+        path_file_name = rf'C:\Users\User\PycharmProjects\qa_automation\filetest {random.randint(0, 999)}.jpg'
+        with open(path_file_name, 'wb+') as f:
+            offset = link_b.find(b'\xff\xd8')
+            f.write(link_b[offset:])
+            check_file = os.path.exists(path_file_name)
+        os.remove(path_file_name)
+        return check_file
 

@@ -3,7 +3,8 @@ import time
 
 import locators.elements_page_locators
 from generator.generator import generated_person
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonPage, LinksPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonPage, LinksPage, \
+    UploadAndDownloadPage
 from locators.elements_page_locators import WebTablePageLocators
 
 
@@ -123,3 +124,17 @@ class TestLinksPage:
         response_code = links_page.check_broken_link("https://demoqa.com/bad-request")
         assert response_code == 400, "The response code didn't equal 400"
 
+
+class TestUploadAndDownload:
+
+    def test_upload_file(self, driver):
+        upload_page = UploadAndDownloadPage(driver, 'https://demoqa.com/upload-download')
+        upload_page.open()
+        file_name, result = upload_page.upload_file()
+        assert file_name == result, "The file has not been uploaded"
+
+    def test_download_file(self, driver):
+        links_page = UploadAndDownloadPage(driver, 'https://demoqa.com/upload-download')
+        links_page.open()
+        check = links_page.download_file()
+        assert check is True, "The file has not been downloaded"

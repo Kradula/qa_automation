@@ -19,3 +19,12 @@ def generated_person():
         current_address=faker_en.street_address(),
         permanent_address=faker_en.street_address(),
     )
+
+
+def generated_file():
+    path = rf'C:\Users\User\PycharmProjects\qa_automation\testfile{random.randint(0, 999)}.txt'
+    file = open(path, 'w+')
+    file.write(f'Hello World{random.randint(0, 999)}')
+    file.close()
+    return file.name, path
+
