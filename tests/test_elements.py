@@ -4,7 +4,7 @@ import time
 import locators.elements_page_locators
 from generator.generator import generated_person
 from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonPage, LinksPage, \
-    UploadAndDownloadPage
+    UploadAndDownloadPage, DynamicPropertiesPage
 from locators.elements_page_locators import WebTablePageLocators
 
 
@@ -138,3 +138,25 @@ class TestUploadAndDownload:
         links_page.open()
         check = links_page.download_file()
         assert check is True, "The file has not been downloaded"
+
+
+class TestDynamicProperties:
+
+    def test_dynamic_properties(self, driver):
+        dynamic_properties_page = DynamicPropertiesPage(driver, "https://demoqa.com/dynamic-properties")
+        dynamic_properties_page.open()
+        color_before, color_after = dynamic_properties_page.check_changed_color()
+        assert color_before != color_after, "The color has not been changed "
+
+    def test_appear_button(self, driver):
+        dynamic_properties_page = DynamicPropertiesPage(driver, "https://demoqa.com/dynamic-properties")
+        dynamic_properties_page.open()
+        appear_button = dynamic_properties_page.check_appear_button()
+        assert appear_button is True, "The button hasn't appeared after 5 seconds"
+
+    def test_enable_button(self, driver):
+        dynamic_properties_page = DynamicPropertiesPage(driver, "https://demoqa.com/dynamic-properties")
+        dynamic_properties_page.open()
+        enable_button = dynamic_properties_page.check_enable_button()
+        assert enable_button is True, "The button hasn't got clickable after 5 seconds"
+

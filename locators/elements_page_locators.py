@@ -80,3 +80,10 @@ class UploadAndDownloadPageLocators:
     UPLOADED_FILE = ('xpath', "//p[@id='uploadedFilePath']")
     UPLOAD_BUTTON = ('xpath', "//input[@id='uploadFile']")
     DOWNLOAD_FILE = ('xpath', "//a[@id='downloadButton']")
+
+
+class DynamicPropertiesPageLocators:
+
+    COLOR_CHANGE_BUTTON = ('xpath', "//button[@id='colorChange']")
+    VISIBLE_AFTER_FIVE_SEC_BUTTON = ('xpath', "//button[@id='visibleAfter']")
+    ENABLE_BUTTON = ('xpath', "//button[@id='enableAfter']")
