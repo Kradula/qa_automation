@@ -160,3 +160,5 @@ class TestDynamicProperties:
         enable_button = dynamic_properties_page.check_enable_button()
         assert enable_button is True, "The button hasn't got clickable after 5 seconds"
 
+
+

@@ -18,13 +18,14 @@ def generated_person():
         email=faker_en.email(),
         current_address=faker_en.street_address(),
         permanent_address=faker_en.street_address(),
+        phone_number=random.randint(7050000000, 7059999999),
     )
 
 
 def generated_file():
     path = rf'C:\Users\User\PycharmProjects\qa_automation\testfile{random.randint(0, 999)}.txt'
-    file = open(path, 'w+')
-    file.write(f'Hello World{random.randint(0, 999)}')
-    file.close()
-    return file.name, path
+    with open(path, 'w+') as file:
+        file.write(f'Hello World{random.randint(0, 999)}')
+        file.close()
+        return file.name, path
 
