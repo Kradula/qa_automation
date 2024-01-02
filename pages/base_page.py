@@ -47,3 +47,5 @@ class BasePage:
         self.driver.execute_script("document.getElementsByTagName('footer')[0].remove();")
         self.driver.execute_script("document.getElementsById('close-fixedban').remove();")
 
+    def switch_to_alert(self):
+        return wait(self.driver, timeout=10).until(EC.alert_is_present())
