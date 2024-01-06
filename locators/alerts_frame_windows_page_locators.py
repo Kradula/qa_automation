@@ -17,3 +17,10 @@ class AlertsPageLocators:
     PROMPT_ALERT_BUTTON = ('xpath', "//button[@id='promtButton']")
     CHECK_PROMPT_ALERT_TEXT = ('xpath', "//span[@id='promptResult']")
 
+
+class FramePageLocators:
+
+    FIRST_FRAME = ('xpath', "//iframe[@id='frame1']")
+    SECOND_FRAME = ('xpath', "//iframe[@id='frame2']")
+    TITLE_FRAME = ('xpath', "//h1[@id='sampleHeading']")
+
